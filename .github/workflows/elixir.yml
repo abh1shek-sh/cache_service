@@ -37,3 +37,5 @@ jobs:
       run: mix deps.get
     - name: Compile app
       run: mix compile
+    - name: Credo check
+      run: mix credo
