@@ -1,0 +1,18 @@
+applications:
+  - name: genserver
+    routes:
+    - route: cache-service-endpoint.com
+      protocol: http2
+    services:
+    - external-service
+    - dynatrace
+    - cache-key
+    env:
+      SERVICE_NAME: external-service
+      DT_TAGS: cache-app
+    instances: 1
+    memory: 8G
+    disk_quota: 4G
+    buildpack: https://github.com/abh1shek-sh/heroku-buildpack-elixir.git
+    stack: cflinuxfs4
+    command: elixir --name app$CF_INSTANCE_INDEX@$CF_INSTANCE_INTERNAL_IP -S mix run --no-halt
